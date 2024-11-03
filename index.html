@@ -33,8 +33,14 @@
         <!-- Library Tab -->
         <div id="library" class="tab-content">
             <h2>Your Library</h2>
-            <input type="file" id="fileInput" accept="audio/*" multiple>
-            <div id="songList"></div>
+            <p>5 files</p>
+            <ul id="songList">
+                <li>Asiyestahili.mp3</li>
+                <li>Hitaji Langu.mp3</li>
+                <li>Je Ingekuwa Ni Wewe.mp3</li>
+                <li>Kijito Cha Utabibu.mp3</li>
+                <li>Twasema Asante.mp3</li>
+            </ul>
             <label for="volumeSlider">Volume:</label>
             <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
         </div>
@@ -66,20 +72,4 @@
 
         <!-- Audio Controls -->
         <div class="controls">
-            <button id="shuffleBtn" aria-label="Shuffle" onclick="toggleShuffle()">Shuffle</button>
-            <button id="repeatBtn" aria-label="Repeat" onclick="toggleRepeat()">Repeat</button>
-            <button onclick="previousSong()">Previous</button>
-            <button id="playPauseBtn" onclick="togglePlayPause()">Play</button>
-            <button onclick="nextSong()">Next</button>
-            <input type="range" id="progressBar" value="0" step="1" max="100" aria-label="Progress">
-            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
-        </div>
-        <div id="currentSong">No song selected</div>
-
-        <!-- Hidden Audio Element -->
-        <audio id="audioPlayer"></audio>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+            <button onclick="toggleShuffle()">
