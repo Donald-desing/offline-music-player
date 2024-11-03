@@ -10,11 +10,10 @@
     <!-- Authentication Screen -->
     <div id="authScreen" class="auth-screen">
         <h2>Login / Register</h2>
-        <form id="authForm">
+        <form id="authForm" onsubmit="login(); return false;">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button type="button" onclick="login()">Login</button>
-            <button type="button" onclick="register()">Register</button>
+            <button type="submit">Login/Register</button>
         </form>
         <div id="authMessage"></div>
     </div>
@@ -23,14 +22,29 @@
     <div id="playerUI" class="player" style="display:none;">
         <h1>Offline Music Player</h1>
 
+        <!-- Tabbed Navigation -->
+        <div class="tabs">
+            <button onclick="showTab('library')">Library</button>
+            <button onclick="showTab('playlists')">Playlists</button>
+            <button onclick="showTab('discover')">Discover</button>
+            <button onclick="showTab('profile')">Profile</button>
+        </div>
+
+        <!-- Library Tab -->
+        <div id="library" class="tab-content">
+            <h2>Your Library</h2>
+            <input type="file" id="fileInput" accept="audio/*" multiple>
+            <div id="songList"></div>
+            <label for="volumeSlider">Volume:</label>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+        </div>
+
         <!-- Playlists Tab -->
         <div id="playlists" class="tab-content">
             <h2>Your Playlists</h2>
-            <div id="playlistContainer">
-                <!-- Playlist items will be dynamically added here -->
-            </div>
             <button onclick="createPlaylist()">Create New Playlist</button>
             <button onclick="sharePlaylist()">Share Playlist</button>
+            <div id="playlistContainer"></div>
         </div>
 
         <!-- Discover Tab -->
@@ -39,9 +53,7 @@
             <input type="text" id="searchInput" placeholder="Search by song, artist, genre...">
             <button onclick="filterSongs()">Search</button>
             <button onclick="filterSongsByGenre()">Filter by Genre</button>
-            <div id="discoverResults">
-                <!-- Search results will appear here -->
-            </div>
+            <div id="discoverResults"></div>
         </div>
 
         <!-- Profile Tab -->
@@ -49,15 +61,16 @@
             <h2>Profile</h2>
             <button onclick="editProfile()">Edit Profile</button>
             <button onclick="logout()">Logout</button>
-            <div id="userSettings">
-                <!-- User settings content will be added here -->
-            </div>
+            <div id="userSettings"></div>
         </div>
 
         <!-- Audio Controls -->
         <div class="controls">
             <button id="shuffleBtn" aria-label="Shuffle" onclick="toggleShuffle()">Shuffle</button>
             <button id="repeatBtn" aria-label="Repeat" onclick="toggleRepeat()">Repeat</button>
+            <button onclick="previousSong()">Previous</button>
+            <button id="playPauseBtn" onclick="togglePlayPause()">Play</button>
+            <button onclick="nextSong()">Next</button>
             <input type="range" id="progressBar" value="0" step="1" max="100" aria-label="Progress">
             <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
         </div>
