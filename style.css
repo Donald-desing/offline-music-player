@@ -1,9 +1,9 @@
-/* Basic styling for the offline music player */
+/* General Styling */
 * {
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
 }
 
 body {
@@ -14,107 +14,75 @@ body {
     background-color: #f0f0f0;
 }
 
-.player {
-    width: 100%;
-    max-width: 400px;
-    background-color: #333;
+/* Container for Main Layout */
+.app-container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+}
+
+/* Profile Section */
+.profile-section {
+    flex: 1;
     padding: 20px;
+    background-color: #222;
+    color: #fff;
+    border-radius: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+/* Main Player Section */
+.main-player {
+    flex: 3;
+    padding: 20px;
+    background-color: #333;
     border-radius: 10px;
     color: #fff;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
-    font-size: 24px;
+/* Search and Filter */
+.search-filter {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-#fileInput {
-    margin-bottom: 20px;
-    padding: 5px;
+#searchInput, #genreFilter {
+    padding: 10px;
     width: 100%;
 }
 
-#songList {
-    margin: 10px 0;
-    max-height: 150px;
+/* Library and Playlist */
+.library {
+    margin-top: 20px;
+}
+
+#songList, #playlist {
+    max-height: 200px;
     overflow-y: auto;
     border: 1px solid #444;
     padding: 10px;
     background-color: #222;
 }
 
-/* Highlight the current song */
-.song-item {
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.song-item:hover {
-    background-color: #444;
-}
-
-.song-item.active {
-    background-color: #555;
-    color: #fff;
-}
-
+/* Controls */
 .controls {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     margin-top: 20px;
 }
 
+/* Buttons */
 button {
     padding: 10px;
     border: none;
     background-color: #555;
     color: #fff;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #777;
-}
-
-#clearPlaylistBtn {
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
-    background-color: #444;
-}
-
-#clearPlaylistBtn:hover {
-    background-color: #666;
-}
-
-#progressBar {
-    width: 100%;
-    margin-top: 10px;
-}
-
-#volumeSlider {
-    width: 100%;
-    margin-top: 10px;
-}
-
-#currentSong {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #ccc;
-}
-
-/* Favorite songs styling */
-#favoriteSongs {
-    max-height: 100px;
-    overflow-y: auto;
-    border: 1px solid #444;
-    padding: 10px;
-    background-color: #222;
-    margin-bottom: 20px;
 }
