@@ -12,13 +12,36 @@ function login() {
     document.getElementById("playerUI").style.display = "block";
 }
 
+function createPlaylist() {
+    const playlistName = prompt("Enter playlist name:");
+    if (playlistName) {
+        playlists.push({ name: playlistName, songs: [] });
+        displayPlaylists();
+    }
+}
+
+function sharePlaylist() {
+    alert("Playlist shared!");
+}
+
+function editProfile() {
+    const newUsername = prompt("Enter new username:");
+    if (newUsername) {
+        alert(`Profile updated with username: ${newUsername}`);
+        userSettings.textContent = `Username: ${newUsername}`;
+    }
+}
+
+function logout() {
+    playerUI.style.display = "none";
+    authScreen.style.display = "block";
+}
+
 function togglePlayPause() {
     const audioPlayer = document.getElementById("audioPlayer");
     if (audioPlayer.paused) {
         audioPlayer.play();
-        document.getElementById("playPauseBtn").textContent = "Pause";
     } else {
         audioPlayer.pause();
-        document.getElementById("playPauseBtn").textContent = "Play";
     }
 }
