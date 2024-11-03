@@ -8,19 +8,22 @@
 </head>
 <body>
     <div class="player">
-        <h1>Offline Music Player</h1>
-        
+        <audio id="audio-player"></audio>
         <div class="controls">
-            <button id="playPauseBtn">Play/Pause</button>
-            <input type="range" id="volume" min="0" max="2" value="1" step="0.01">
-            <label for="volume">Volume</label>
-            <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
-            <label for="panner">Pan</label>
+            <button id="play-pause">Play</button>
+            <button id="shuffle">Shuffle</button>
+            <button id="loop">Loop</button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+            <input type="range" id="seek-bar" min="0" max="100" value="0">
+            <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
         </div>
-        
-        <audio id="audio" src="sample-audio.mp3"></audio>
-        <p id="currentSong">Currently playing: sample-audio.mp3</p>
+        <input type="file" id="file-input" accept="audio/*">
     </div>
+    <div class="playlist">
+        <h2>Your Playlist</h2>
+        <ul id="playlist-container"></ul>
+    </div>
+    <script src="https://unpkg.com/idb@7.0.0/build/iife/index-min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
