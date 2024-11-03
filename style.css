@@ -13,7 +13,7 @@ body {
     background-color: #f0f0f0;
 }
 
-.auth-screen, .player {
+.player {
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -24,76 +24,39 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.auth-screen h2, .player h1 {
+h1 {
     font-size: 24px;
     margin-bottom: 15px;
 }
 
-.tabs {
+.controls {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: center;
 }
 
 button {
-    padding: 10px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
     border: none;
     background-color: #555;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #777;
-    transform: scale(1.05);
 }
 
-.tab-content {
-    display: none;
-    margin-top: 20px;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-#songList {
-    text-align: left;
-    margin-top: 10px;
-    color: #ddd;
-}
-
-#playlistContainer, #discoverResults, #userSettings {
-    margin-top: 10px;
-    max-height: 150px;
-    overflow-y: auto;
-    border: 1px solid #444;
-    padding: 10px;
-    background-color: #222;
-}
-
-.controls {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#progressBar, #volumeSlider {
+input[type="range"] {
     width: 100%;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
 #currentSong {
     margin-top: 15px;
     font-size: 14px;
     color: #ccc;
-    font-weight: bold; /* Enhanced readability */
-}
-
-span {
-    font-size: 12px;
-    color: #aaa;
 }
