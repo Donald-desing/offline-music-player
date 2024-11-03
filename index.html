@@ -13,11 +13,14 @@
             <button id="play-pause">Play</button>
             <button id="shuffle">Shuffle</button>
             <button id="loop">Loop</button>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+        <div class="progress">
+            <span id="current-time">0:00</span>
             <input type="range" id="seek-bar" min="0" max="100" value="0">
-            <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+            <span id="total-time">0:00</span>
         </div>
         <input type="file" id="file-input" accept="audio/*">
+        <label for="file-input">No file chosen</label>
     </div>
     <div class="playlist">
         <h2>Your Playlist</h2>
