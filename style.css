@@ -1,11 +1,12 @@
-/* General Styling */
+/* Universal Styling */
 * {
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
+/* Body Styling */
 body {
     display: flex;
     justify-content: center;
@@ -14,75 +15,121 @@ body {
     background-color: #f0f0f0;
 }
 
-/* Container for Main Layout */
-.app-container {
-    display: flex;
-    width: 80%;
-    max-width: 1200px;
-}
-
-/* Profile Section */
-.profile-section {
-    flex: 1;
-    padding: 20px;
-    background-color: #222;
-    color: #fff;
-    border-radius: 10px;
-    margin-right: 20px;
-    text-align: center;
-}
-
-/* Main Player Section */
-.main-player {
-    flex: 3;
+/* Authentication Screen Styling */
+.auth-screen {
+    width: 100%;
+    max-width: 400px;
     padding: 20px;
     background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Player UI Styling */
+.player {
+    width: 100%;
+    max-width: 400px;
+    background-color: #333;
+    padding: 20px;
     border-radius: 10px;
     color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Search and Filter */
-.search-filter {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
-#searchInput, #genreFilter {
-    padding: 10px;
-    width: 100%;
-}
-
-/* Library and Playlist */
-.library {
-    margin-top: 20px;
-}
-
-#songList, #playlist {
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #444;
-    padding: 10px;
-    background-color: #222;
-}
-
-/* Controls */
+/* Control Buttons Styling */
 .controls {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-top: 20px;
 }
 
-/* Buttons */
 button {
     padding: 10px;
     border: none;
     background-color: #555;
     color: #fff;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #777;
+}
+
+/* Input Sliders */
+#progressBar, #volumeSlider {
+    width: 100%;
+    margin-top: 10px;
+    appearance: none;
+    background-color: #444;
+    height: 5px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#progressBar::-webkit-slider-thumb, 
+#volumeSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#progressBar::-webkit-slider-thumb:hover, 
+#volumeSlider::-webkit-slider-thumb:hover {
+    background-color: #777;
+}
+
+/* Current Song Display */
+#currentSong {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Tab Content Styling */
+.tab-content {
+    margin-top: 20px;
+}
+
+/* Playlist and User Settings Containers */
+#playlistContainer, #userSettings {
+    margin-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
+}
+
+/* Discover Tab Search */
+#searchInput {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #777;
 }
