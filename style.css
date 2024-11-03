@@ -1,0 +1,78 @@
+/* Basic styling for the offline music player */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.player {
+    width: 100%;
+    max-width: 400px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#fileInput {
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 100%;
+}
+
+#songList {
+    margin: 10px 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    padding: 10px;
+    background-color: #222;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #555;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+#progressBar {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#currentSong {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
