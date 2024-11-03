@@ -8,12 +8,15 @@ const nextBtn = document.getElementById("nextBtn");
 const progressBar = document.getElementById("progressBar");
 const currentSongDisplay = document.getElementById("currentSong");
 const volumeSlider = document.getElementById("volumeSlider");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const repeatBtn = document.getElementById("repeatBtn");
+const favoriteSongsDisplay = document.getElementById("favoriteSongs");
 
 let songs = [];
 let currentSongIndex = 0;
-
-// Load playlist from local storage on page load
-document.addEventListener("DOMContentLoaded", loadPlaylistFromLocalStorage);
+let isShuffle = false;
+let isRepeat = false;
+let favoriteSongs = [];
 
 // Handle file input
 fileInput.addEventListener("change", (event) => {
@@ -31,6 +34,17 @@ function displaySongs() {
         songItem.textContent = song.name;
         songItem.classList.add("song-item");
         songItem.addEventListener("click", () => loadSong(index));
+        
+        // Add favorite toggle
+        const favoriteBtn = document.createElement("button");
+        favoriteBtn.textContent = favoriteSongs.includes(song) ? "Unfavorite" : "Favorite";
+        favoriteBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent loading song
+            toggleFavorite(index);
+            favoriteBtn.textContent = favoriteSongs.includes(song) ? "Unfavorite" : "Favorite";
+        });
+
+        songItem.appendChild(favoriteBtn);
         songList.appendChild(songItem);
     });
 }
@@ -67,8 +81,14 @@ playPauseBtn.addEventListener("click", () => {
 
 // Next and previous buttons
 nextBtn.addEventListener("click", () => {
-    if (currentSongIndex < songs.length - 1) {
-        loadSong(currentSongIndex + 1);
+    if (isShuffle) {
+        loadSong(Math.floor(Math.random() * songs.length));
+    } else {
+        if (currentSongIndex < songs.length - 1) {
+            loadSong(currentSongIndex + 1);
+        } else if (isRepeat) {
+            loadSong(0); // Loop back to the start
+        }
     }
 });
 
@@ -77,6 +97,39 @@ prevBtn.addEventListener("click", () => {
         loadSong(currentSongIndex - 1);
     }
 });
+
+// Shuffle functionality
+shuffleBtn.addEventListener("click", () => {
+    isShuffle = !isShuffle;
+    shuffleBtn.classList.toggle('active', isShuffle);
+});
+
+// Repeat functionality
+repeatBtn.addEventListener("click", () => {
+    isRepeat = !isRepeat;
+    repeatBtn.classList.toggle('active', isRepeat);
+});
+
+// Favorite song functionality
+function toggleFavorite(index) {
+    const song = songs[index];
+    if (favoriteSongs.includes(song)) {
+        favoriteSongs = favoriteSongs.filter(fav => fav !== song);
+    } else {
+        favoriteSongs.push(song);
+    }
+    displayFavorites();
+}
+
+// Display favorite songs
+function displayFavorites() {
+    favoriteSongsDisplay.innerHTML = "";
+    favoriteSongs.forEach(song => {
+        const songItem = document.createElement("div");
+        songItem.textContent = song.name;
+        favoriteSongsDisplay.appendChild(songItem);
+    });
+}
 
 // Update progress bar as song plays
 audioPlayer.addEventListener("timeupdate", () => {
@@ -97,27 +150,3 @@ audioPlayer.volume = volumeSlider.value;
 volumeSlider.addEventListener("input", () => {
     audioPlayer.volume = volumeSlider.value;
 });
-
-// Save playlist to local storage
-function savePlaylistToLocalStorage() {
-    const songData = songs.map(song => ({
-        name: song.name,
-        type: song.type,
-        content: URL.createObjectURL(song)
-    }));
-    localStorage.setItem("playlist", JSON.stringify(songData));
-}
-
-// Load playlist from local storage
-function loadPlaylistFromLocalStorage() {
-    const savedSongs = JSON.parse(localStorage.getItem("playlist"));
-    if (savedSongs) {
-        // Recreate File objects from stored data
-        songs = savedSongs.map(fileInfo => {
-            const fileBlob = new Blob([fileInfo.content], { type: fileInfo.type });
-            return new File([fileBlob], fileInfo.name, { type: fileInfo.type });
-        });
-        displaySongs();
-        loadSong(0); // Load the first song
-    }
-}
