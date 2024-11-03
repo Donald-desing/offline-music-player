@@ -7,85 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Authentication Screen -->
-    <div id="authScreen" class="auth-screen">
-        <h2>Login / Register</h2>
-        <form id="authForm" onsubmit="login(); return false;">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login/Register</button>
-        </form>
-        <div id="authMessage"></div>
-    </div>
-
-    <!-- Main Music Player UI -->
-    <div id="playerUI" class="player" style="display:none;">
+    <div class="player">
         <h1>Offline Music Player</h1>
-
-        <!-- Tabbed Navigation -->
-        <div class="tabs">
-            <button onclick="showTab('library')">Library</button>
-            <button onclick="showTab('playlists')">Playlists</button>
-            <button onclick="showTab('discover')">Discover</button>
-            <button onclick="showTab('profile')">Profile</button>
-        </div>
-
-        <!-- Library Tab -->
-        <div id="library" class="tab-content">
-            <h2>Your Library</h2>
-            <p>5 files</p>
-            <ul id="songList">
-                <li>Asiyestahili.mp3</li>
-                <li>Hitaji Langu.mp3</li>
-                <li>Je Ingekuwa Ni Wewe.mp3</li>
-                <li>Kijito Cha Utabibu.mp3</li>
-                <li>Twasema Asante.mp3</li>
-            </ul>
-            <label for="volumeSlider">Volume:</label>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
-        </div>
-
-        <!-- Playlists Tab -->
-        <div id="playlists" class="tab-content">
-            <h2>Your Playlists</h2>
-            <button onclick="createPlaylist()">Create New Playlist</button>
-            <button onclick="sharePlaylist()">Share Playlist</button>
-            <div id="playlistContainer"></div>
-        </div>
-
-        <!-- Discover Tab -->
-        <div id="discover" class="tab-content">
-            <h2>Discover Music</h2>
-            <input type="text" id="searchInput" placeholder="Search by song, artist, genre...">
-            <button onclick="filterSongs()">Search</button>
-            <button onclick="filterSongsByGenre()">Filter by Genre</button>
-            <div id="discoverResults"></div>
-        </div>
-
-        <!-- Profile Tab -->
-        <div id="profile" class="tab-content">
-            <h2>Profile</h2>
-            <button onclick="editProfile()">Edit Profile</button>
-            <button onclick="logout()">Logout</button>
-            <div id="userSettings"></div>
-        </div>
-
-        <!-- Audio Controls -->
+        
         <div class="controls">
-            <button onclick="toggleShuffle()">Shuffle</button>
-            <button onclick="toggleRepeat()">Repeat</button>
-            <button onclick="previousSong()">Previous</button>
-            <button onclick="togglePlayPause()">Play</button>
-            <button onclick="nextSong()">Next</button>
-            <input type="range" id="progressBar" value="0" step="1" max="100">
-            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+            <button id="playPauseBtn">Play/Pause</button>
+            <input type="range" id="volume" min="0" max="2" value="1" step="0.01">
+            <label for="volume">Volume</label>
+            <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+            <label for="panner">Pan</label>
         </div>
-        <div id="currentSong">Playing: Asiyestahili.mp3</div>
-
-        <!-- Hidden Audio Element -->
-        <audio id="audioPlayer"></audio>
+        
+        <audio id="audio" src="sample-audio.mp3"></audio>
+        <p id="currentSong">Currently playing: sample-audio.mp3</p>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
