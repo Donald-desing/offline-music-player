@@ -76,3 +76,7 @@ button:hover {
     font-size: 14px;
     color: #ccc;
 }
+#volumeSlider {
+    width: 100%;
+    margin-top: 10px;
+}
