@@ -72,4 +72,20 @@
 
         <!-- Audio Controls -->
         <div class="controls">
-            <button onclick
+            <button onclick="toggleShuffle()">Shuffle</button>
+            <button onclick="toggleRepeat()">Repeat</button>
+            <button onclick="previousSong()">Previous</button>
+            <button onclick="togglePlayPause()">Play</button>
+            <button onclick="nextSong()">Next</button>
+            <input type="range" id="progressBar" value="0" step="1" max="100">
+            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+        </div>
+        <div id="currentSong">Playing: Asiyestahili.mp3</div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audioPlayer"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
