@@ -7,41 +7,58 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="player">
-        <h1>Offline Music Player</h1>
-        
-        <!-- Upload Button -->
-        <input type="file" id="fileInput" accept="audio/*" multiple>
-        
-        <!-- Song List -->
-        <div id="songList"></div>
-        
-        <!-- Volume Control -->
-        <label for="volumeSlider">Volume:</label>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
-        
-        <!-- Audio Controls -->
-        <div class="controls">
-            <button id="shuffleBtn">Shuffle</button>
-            <button id="repeatBtn">Repeat</button>
-            <button id="prevBtn">Previous</button>
-            <button id="playPauseBtn">Play</button>
-            <button id="nextBtn">Next</button>
-            <input type="range" id="progressBar" value="0" step="1" max="100">
-        </div>
-        
-        <!-- Display Current Song -->
-        <div id="currentSong">No song selected</div>
+    <div class="app-container">
+        <!-- Profile Section -->
+        <aside class="profile-section">
+            <h2>User Profile</h2>
+            <p>Welcome, [User's Name]</p>
+            <button id="editProfileBtn">Edit Profile</button>
+        </aside>
 
-        <!-- Display Favorite Songs -->
-        <h2>Favorites</h2>
-        <div id="favoriteSongs"></div>
-        
-        <!-- Clear Playlist Button -->
-        <button id="clearPlaylistBtn">Clear Playlist</button>
-        
-        <!-- Hidden Audio Element -->
-        <audio id="audioPlayer"></audio>
+        <div class="main-player">
+            <h1>Offline Music Player</h1>
+
+            <!-- Search and Categorization -->
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Search for songs, artists, albums...">
+                <select id="genreFilter">
+                    <option value="all">All Genres</option>
+                    <option value="pop">Pop</option>
+                    <option value="rock">Rock</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="classical">Classical</option>
+                </select>
+            </div>
+
+            <!-- Upload Button -->
+            <input type="file" id="fileInput" accept="audio/*" multiple>
+
+            <!-- Song List and Playlist -->
+            <div class="library">
+                <h2>Library</h2>
+                <div id="songList"></div>
+                <h2>Your Playlist</h2>
+                <div id="playlist"></div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="controls">
+                <button id="shuffleBtn">Shuffle</button>
+                <button id="repeatBtn">Repeat</button>
+                <button id="prevBtn">Previous</button>
+                <button id="playPauseBtn">Play</button>
+                <button id="nextBtn">Next</button>
+                <input type="range" id="progressBar" value="0" step="1" max="100">
+            </div>
+
+            <!-- Volume and Song Info -->
+            <label for="volumeSlider">Volume:</label>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+            <div id="currentSong">No song selected</div>
+
+            <!-- Hidden Audio Element -->
+            <audio id="audioPlayer"></audio>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
