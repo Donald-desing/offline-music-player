@@ -109,16 +109,12 @@ button:hover {
     color: #ccc;
 }
 
-/* Optional: Custom scrollbar styling */
-#songList::-webkit-scrollbar {
-    width: 6px;
-}
-
-#songList::-webkit-scrollbar-thumb {
-    background-color: #444;
-    border-radius: 10px;
-}
-
-#songList::-webkit-scrollbar-thumb:hover {
-    background-color: #666;
+/* Favorite songs styling */
+#favoriteSongs {
+    max-height: 100px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    padding: 10px;
+    background-color: #222;
+    margin-bottom: 20px;
 }
