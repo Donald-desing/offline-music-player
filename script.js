@@ -7,15 +7,20 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const progressBar = document.getElementById("progressBar");
 const currentSongDisplay = document.getElementById("currentSong");
+const volumeSlider = document.getElementById("volumeSlider");
 
 let songs = [];
 let currentSongIndex = 0;
 
+// Load playlist from local storage on page load
+document.addEventListener("DOMContentLoaded", loadPlaylistFromLocalStorage);
+
 // Handle file input
 fileInput.addEventListener("change", (event) => {
-    songs = Array.from(event.target.files); // Store uploaded files in array
+    songs = Array.from(event.target.files);
     displaySongs();
-    loadSong(0); // Load the first song
+    loadSong(0);
+    savePlaylistToLocalStorage();
 });
 
 // Display song list
@@ -84,7 +89,6 @@ progressBar.addEventListener("input", () => {
     const seekTime = (progressBar.value / 100) * audioPlayer.duration;
     audioPlayer.currentTime = seekTime;
 });
-const volumeSlider = document.getElementById("volumeSlider");
 
 // Set the initial volume
 audioPlayer.volume = volumeSlider.value;
@@ -93,3 +97,27 @@ audioPlayer.volume = volumeSlider.value;
 volumeSlider.addEventListener("input", () => {
     audioPlayer.volume = volumeSlider.value;
 });
+
+// Save playlist to local storage
+function savePlaylistToLocalStorage() {
+    const songData = songs.map(song => ({
+        name: song.name,
+        type: song.type,
+        content: URL.createObjectURL(song)
+    }));
+    localStorage.setItem("playlist", JSON.stringify(songData));
+}
+
+// Load playlist from local storage
+function loadPlaylistFromLocalStorage() {
+    const savedSongs = JSON.parse(localStorage.getItem("playlist"));
+    if (savedSongs) {
+        // Recreate File objects from stored data
+        songs = savedSongs.map(fileInfo => {
+            const fileBlob = new Blob([fileInfo.content], { type: fileInfo.type });
+            return new File([fileBlob], fileInfo.name, { type: fileInfo.type });
+        });
+        displaySongs();
+        loadSong(0); // Load the first song
+    }
+}
