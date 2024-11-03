@@ -42,11 +42,12 @@ button {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
     background-color: #777;
+    transform: scale(1.05);
 }
 
 .tab-content {
@@ -89,6 +90,7 @@ button:hover {
     margin-top: 15px;
     font-size: 14px;
     color: #ccc;
+    font-weight: bold; /* Enhanced readability */
 }
 
 span {
