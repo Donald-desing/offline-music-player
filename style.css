@@ -29,11 +29,10 @@ body {
     margin-bottom: 15px;
 }
 
-.controls, .tabs {
+.tabs {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
 button {
@@ -50,17 +49,6 @@ button:hover {
     background-color: #777;
 }
 
-#progressBar, #volumeSlider {
-    width: 100%;
-    margin-top: 10px;
-}
-
-#currentSong, #currentTime, #totalTime {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #ccc;
-}
-
 .tab-content {
     display: none;
     margin-top: 20px;
@@ -70,11 +58,40 @@ button:hover {
     display: block;
 }
 
-#playlistContainer, #userSettings, #songList, #discoverResults {
+#songList {
+    text-align: left;
+    margin-top: 10px;
+    color: #ddd;
+}
+
+#playlistContainer, #discoverResults, #userSettings {
     margin-top: 10px;
     max-height: 150px;
     overflow-y: auto;
     border: 1px solid #444;
     padding: 10px;
     background-color: #222;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#progressBar, #volumeSlider {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#currentSong {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+span {
+    font-size: 12px;
+    color: #aaa;
 }
