@@ -84,3 +84,12 @@ progressBar.addEventListener("input", () => {
     const seekTime = (progressBar.value / 100) * audioPlayer.duration;
     audioPlayer.currentTime = seekTime;
 });
+const volumeSlider = document.getElementById("volumeSlider");
+
+// Set the initial volume
+audioPlayer.volume = volumeSlider.value;
+
+// Update volume based on slider value
+volumeSlider.addEventListener("input", () => {
+    audioPlayer.volume = volumeSlider.value;
+});
