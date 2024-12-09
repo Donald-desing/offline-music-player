@@ -1,103 +1,80 @@
-/* Style for the overall page */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-}
-
-/* Container for all the content */
-.container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
 }
 
-/* Header Style */
-header h1 {
-    text-align: center;
-    color: #ffffff;
-    background-color: #007bff;
-    padding: 10px;
-}
-
-/* Tabs Navigation */
+/* Tab Buttons */
 .tabs {
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 20px;
-}
-
-.tab-button {
-    background-color: #ddd;
-    border: none;
-    padding: 10px;
-    width: 45%;
-    text-align: center;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.tab-button.active {
-    background-color: #007bff;
-    color: white;
-}
-
-.tab-button:hover {
-    background-color: #0056b3;
-}
-
-/* Tabs Content */
-.tab-content {
-    display: none;
-    margin-top: 20px;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* Music List */
-.music-list {
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-.music-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-.music-list li {
-    padding: 5px;
-    background-color: #e9ecef;
-    margin: 5px 0;
+.tabButton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-/* File Upload Section */
-.file-upload {
-    margin-top: 20px;
+.tabButton.active {
+    background-color: #4CAF50;
+    color: white;
 }
 
-input[type="file"] {
+/* Tab Content */
+.tabContent {
     display: none;
 }
 
-label {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+.tabContent.active {
+    display: block;
+}
+
+/* File Upload Styles */
+#fileInput {
+    margin-bottom: 20px;
+}
+
+#dropZone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Music List */
+#musicList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#musicList li {
+    padding: 10px;
     cursor: pointer;
-    display: inline-block;
+    margin-bottom: 5px;
 }
 
-label:hover {
-    background-color: #0056b3;
+#musicList li:hover {
+    background-color: #f0f0f0;
 }
 
-audio {
-    width: 100%;
+/* Audio Controls */
+#controls {
+    text-align: center;
     margin-top: 20px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
