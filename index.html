@@ -8,27 +8,38 @@
 </head>
 <body>
 
-    <!-- Navigation Bar / Tabs -->
-    <div id="tabs">
-        <button id="yourMusicTabBtn">Your Music</button>
-        <button id="uploadTabBtn">Upload</button>
+    <!-- Main Home Page -->
+    <div id="homePage">
+
+        <!-- Search Bar -->
+        <div id="searchContainer">
+            <input type="text" id="searchBar" placeholder="Search for music..." oninput="filterMusic()">
+        </div>
+
+        <!-- Upload Section -->
+        <div id="uploadContainer">
+            <input type="file" id="fileInput" accept="audio/mp3">
+        </div>
+
+        <!-- Playback Controls -->
+        <div id="controlsContainer">
+            <button id="prevBtn">Previous</button>
+            <button id="playPauseBtn">Play</button>
+            <button id="nextBtn">Next</button>
+            <button id="shuffleBtn">Shuffle</button>
+            <button id="repeatBtn">Repeat</button>
+        </div>
+
+        <!-- Your Music Section -->
+        <div id="yourMusicSection">
+            <h3>Your Music</h3>
+            <ul id="yourMusicList"></ul>
+        </div>
+        
     </div>
 
     <!-- Audio Player -->
     <audio id="audioPlayer" controls></audio>
-
-    <!-- Your Music Section -->
-    <div id="yourMusicTab" class="tab" style="display:block;">
-        <h2>Your Music</h2>
-        <ul id="yourMusicList"></ul>
-    </div>
-
-    <!-- Upload Section -->
-    <div id="uploadTab" class="tab" style="display:none;">
-        <h2>Upload Your Music</h2>
-        <!-- File Input -->
-        <input type="file" id="fileInput" accept="audio/mp3">
-    </div>
 
     <script src="script.js"></script>
 </body>
