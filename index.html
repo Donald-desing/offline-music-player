@@ -7,37 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Offline Music Player</h1>
-        </header>
+    <!-- Tabs for switching sections -->
+    <div class="tabs">
+        <button class="tabButton active" id="tabUpload">Upload Music</button>
+        <button class="tabButton" id="tabYourMusic">Your Music</button>
+    </div>
 
-        <!-- Tabs Navigation -->
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab('yourMusic')">Your Music</button>
-            <button class="tab-button" onclick="openTab('uploadMusic')">Upload Music</button>
-        </div>
+    <!-- Tab Content: Upload Music -->
+    <div id="uploadTab" class="tabContent active">
+        <h3>Upload Your Music</h3>
+        <input type="file" id="fileInput" accept="audio/mp3">
+        <label for="fileInput">Choose Files</label>
+        <div id="dropZone">Drag & Drop Files Here</div>
+        <ul id="musicList"></ul>
+    </div>
 
-        <!-- Tabs Content -->
-        <div id="yourMusic" class="tab-content active">
-            <h3>Your Music</h3>
-            <ul id="musicList">
-                <!-- Music list items will appear here -->
-            </ul>
-        </div>
+    <!-- Tab Content: Your Music -->
+    <div id="yourMusicTab" class="tabContent">
+        <h3>Your Music</h3>
+        <ul id="uploadedMusicList"></ul>
+    </div>
 
-        <div id="uploadMusic" class="tab-content">
-            <h3>Upload Your Music</h3>
-            <input type="file" id="fileInput" accept="audio/mp3" />
-            <label for="fileInput">Choose Files</label>
-        </div>
-
-        <div class="player-controls">
-            <div id="shuffle" class="control">Shuffle: Off</div>
-            <div id="repeat" class="control">Repeat: Off</div>
-        </div>
-
+    <!-- Audio Controls -->
+    <div id="controls">
         <audio id="audioPlayer" controls></audio>
+        <button id="shuffleBtn">Shuffle: Off</button>
+        <button id="repeatBtn">Repeat: Off</button>
     </div>
 
     <script src="script.js"></script>
