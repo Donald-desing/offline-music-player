@@ -1,61 +1,76 @@
+/* Basic styling for layout */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
 }
 
-#homePage {
-    width: 100%;
-    text-align: center;
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
 }
 
-#searchContainer {
-    margin: 20px;
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-#searchBar {
-    padding: 10px;
-    width: 70%;
-    font-size: 16px;
-}
-
-#uploadContainer {
-    margin: 20px;
-}
-
-#fileInput {
-    padding: 10px;
-    font-size: 16px;
-}
-
-#controlsContainer {
-    margin: 20px;
-}
-
-#controlsContainer button {
+.tab {
     padding: 10px 20px;
-    margin: 5px;
-    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
     cursor: pointer;
+    margin: 0 5px;
 }
 
-#yourMusicSection {
-    margin: 20px;
+.tab:hover {
+    background-color: #555;
+}
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
 }
 
 #yourMusicList {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 #yourMusicList li {
-    margin: 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
-#audioPlayer {
-    width: 80%;
+#yourMusicList li:hover {
+    background-color: #f0f0f0;
+}
+
+#playbackControls {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
+}
+
+button {
+    margin: 0 10px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
 }
