@@ -1,22 +1,43 @@
 const CACHE_NAME = 'offline-music-player-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
+  './', // Caches the root index.html file
+  './index.html',
+  './styles.css', // If you have a CSS file, add it here
+  './script.js',  // If you have an external JS file, add it here
 ];
 
-self.addEventListener('install', function(event) {
+// Install event
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('Opened cache');
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener('fetch', function(event) {
+// Fetch event
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
+    caches.match(event.request).then((response) => {
+      // Return the cached resource if available, otherwise fetch from network
       return response || fetch(event.request);
+    })
+  );
+});
+
+// Activate event
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });
