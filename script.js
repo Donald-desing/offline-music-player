@@ -1,48 +1,103 @@
-// Elements
-const fileInput = document.getElementById('fileInput');
-const playlist = document.getElementById('playlist');
-const audioPlayer = document.getElementById('audioPlayer');
+const audioPlayer = document.getElementById("audio-player");
+const audioList = document.getElementById("audio-list");
+const progressBar = document.getElementById("progress-bar");
+const shuffleButton = document.getElementById("shuffle-btn");
+const repeatButton = document.getElementById("repeat-btn");
+const fileInput = document.getElementById("file-input");
 
-// Event listener for file input
-fileInput.addEventListener('change', (event) => {
-  const files = event.target.files;
-  if (files.length > 0) {
-    Array.from(files).forEach((file) => {
-      const url = URL.createObjectURL(file);
-      const songName = file.name;
+let audioFiles = [];
+let isShuffling = false;
+let isRepeating = false;
 
-      // Save the song details to local storage
-      let storedSongs = JSON.parse(localStorage.getItem('songs')) || [];
-      storedSongs.push({ name: songName, url });
-      localStorage.setItem('songs', JSON.stringify(storedSongs));
+// Load initial tracks from local storage
+function loadPlaylist() {
+  const savedTracks = JSON.parse(localStorage.getItem("audioFiles")) || [];
+  audioFiles = savedTracks;
 
-      // Add song to playlist
-      addToPlaylist(songName, url);
+  savedTracks.forEach((track) => {
+    const li = document.createElement("li");
+    li.textContent = track.name;
+    li.dataset.file = track.file;
+
+    li.addEventListener("click", () => {
+      audioPlayer.src = li.dataset.file;
+      audioPlayer.play();
     });
+
+    audioList.appendChild(li);
+  });
+}
+
+// Save tracks to local storage
+function savePlaylist() {
+  localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
+}
+
+// Handle shuffle functionality
+shuffleButton.addEventListener("click", () => {
+  isShuffling = !isShuffling;
+  shuffleButton.textContent = isShuffling ? "Shuffle: On" : "Shuffle: Off";
+});
+
+// Handle repeat functionality
+repeatButton.addEventListener("click", () => {
+  isRepeating = !isRepeating;
+  repeatButton.textContent = isRepeating ? "Repeat: On" : "Repeat: Off";
+});
+
+// Play next track or shuffle
+audioPlayer.addEventListener("ended", () => {
+  if (isRepeating) {
+    audioPlayer.play();
+  } else if (isShuffling) {
+    const randomIndex = Math.floor(Math.random() * audioFiles.length);
+    audioPlayer.src = audioFiles[randomIndex].file;
+    audioPlayer.play();
+  } else {
+    const currentIndex = audioFiles.findIndex(
+      (audio) => audio.file === audioPlayer.src
+    );
+    const nextIndex = (currentIndex + 1) % audioFiles.length;
+    audioPlayer.src = audioFiles[nextIndex].file;
+    audioPlayer.play();
   }
 });
 
-// Function to load songs from local storage on page load
-function loadPlaylist() {
-  const storedSongs = JSON.parse(localStorage.getItem('songs')) || [];
-  storedSongs.forEach((song) => {
-    addToPlaylist(song.name, song.url);
+// Update progress bar
+audioPlayer.addEventListener("timeupdate", () => {
+  const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+  progressBar.value = progress || 0;
+});
+
+// Seek track position
+progressBar.addEventListener("click", (event) => {
+  const rect = progressBar.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+  const newTime = (clickX / rect.width) * audioPlayer.duration;
+  audioPlayer.currentTime = newTime;
+});
+
+// Handle file uploads
+fileInput.addEventListener("change", (event) => {
+  const files = event.target.files;
+
+  Array.from(files).forEach((file) => {
+    const url = URL.createObjectURL(file);
+    const li = document.createElement("li");
+    li.textContent = file.name;
+    li.dataset.file = url;
+
+    li.addEventListener("click", () => {
+      audioPlayer.src = li.dataset.file;
+      audioPlayer.play();
+    });
+
+    audioList.appendChild(li);
+    audioFiles.push({ name: file.name, file: url });
   });
-}
 
-// Function to add song to playlist
-function addToPlaylist(songName, url) {
-  const listItem = document.createElement('li');
-  listItem.textContent = songName;
+  savePlaylist();
+});
 
-  // Play song on click
-  listItem.addEventListener('click', () => {
-    audioPlayer.src = url;
-    audioPlayer.play();
-  });
-
-  playlist.appendChild(listItem);
-}
-
-// Load the playlist when the page loads
-document.addEventListener('DOMContentLoaded', loadPlaylist);
+// Load playlist on page load
+loadPlaylist();
