@@ -4,170 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Offline Music Player</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    input[type="file"], input[type="text"] {
-      margin: 10px 0;
-      padding: 8px;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      padding: 10px;
-      background: #f3f3f3;
-      margin: 5px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <h1>Offline Music Player</h1>
+  </header>
 
-  <h1>Offline Music Player</h1>
+  <main>
+    <section id="audio-controls">
+      <audio id="audio-player" controls></audio>
+      <div id="buttons">
+        <button id="shuffle-btn">Shuffle</button>
+        <button id="repeat-btn">Repeat</button>
+      </div>
+    </section>
 
-  <!-- File Upload -->
-  <input type="file" id="fileInput" accept="audio/*" multiple>
-  <button onclick="addFiles()">Add Files</button>
+    <section id="track-list">
+      <h2>Your Music</h2>
+      <ul id="audio-list"></ul>
+    </section>
 
-  <!-- Search Bar -->
-  <input type="text" id="searchInput" placeholder="Search for a song..." oninput="filterFiles()">
+    <section id="progress-container">
+      <progress id="progress-bar" value="0" max="100"></progress>
+    </section>
 
-  <!-- File List -->
-  <ul id="fileList"></ul>
+    <section id="upload-section">
+      <h2>Upload Your Music</h2>
+      <input type="file" id="file-input" multiple accept="audio/*">
+    </section>
+  </main>
 
-  <!-- Audio Player -->
-  <audio id="audioPlayer" controls></audio>
-
-  <!-- Create Playlist Section -->
-  <h2>Create Playlist</h2>
-  <input type="text" id="playlistName" placeholder="Enter playlist name">
-  <button onclick="createPlaylist()">Create Playlist</button>
-
-  <!-- Playlist List -->
-  <ul id="playlistList"></ul>
-
-  <script>
-    let savedFiles = JSON.parse(localStorage.getItem('savedFiles')) || [];
-    const fileList = document.getElementById('fileList');
-    const audioPlayer = document.getElementById('audioPlayer');
-
-    function addFiles() {
-      const files = document.getElementById('fileInput').files;
-      Array.from(files).forEach(file => {
-        const fileUrl = URL.createObjectURL(file);
-        savedFiles.push({ name: file.name, url: fileUrl });
-      });
-      localStorage.setItem('savedFiles', JSON.stringify(savedFiles));
-      displayFiles();
-    }
-
-    function displayFiles() {
-      fileList.innerHTML = '';
-      savedFiles.forEach((file, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${file.name}
-          <button onclick="playAudio(${index})">Play</button>
-          <button onclick="deleteAudio(${index})">Delete</button>
-        `;
-        fileList.appendChild(li);
-      });
-    }
-
-    function playAudio(index) {
-      audioPlayer.src = savedFiles[index].url;
-      audioPlayer.play();
-    }
-
-    function deleteAudio(index) {
-      savedFiles.splice(index, 1);
-      localStorage.setItem('savedFiles', JSON.stringify(savedFiles));
-      displayFiles();
-    }
-
-    function filterFiles() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const filteredFiles = savedFiles.filter(file => file.name.toLowerCase().includes(query));
-      displayFilteredFiles(filteredFiles);
-    }
-
-    function displayFilteredFiles(files) {
-      fileList.innerHTML = '';
-      files.forEach((file, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${file.name}
-          <button onclick="playAudio(${index})">Play</button>
-          <button onclick="deleteAudio(${index})">Delete</button>
-        `;
-        fileList.appendChild(li);
-      });
-    }
-
-    // Playlist Management
-    const playlists = JSON.parse(localStorage.getItem('playlists')) || [];
-
-    function createPlaylist() {
-      const name = document.getElementById('playlistName').value;
-      if (!name) return alert('Please enter a playlist name');
-      playlists.push({ name, files: [...savedFiles] });
-      localStorage.setItem('playlists', JSON.stringify(playlists));
-      displayPlaylists();
-    }
-
-    function displayPlaylists() {
-      const playlistList = document.getElementById('playlistList');
-      playlistList.innerHTML = '';
-      playlists.forEach((playlist, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${playlist.name}
-          <button onclick="playPlaylist(${index})">Play</button>
-          <button onclick="deletePlaylist(${index})">Delete</button>
-        `;
-        playlistList.appendChild(li);
-      });
-    }
-
-    function playPlaylist(index) {
-      const playlist = playlists[index];
-      audioPlayer.src = playlist.files[0].url;
-      audioPlayer.play();
-    }
-
-    function deletePlaylist(index) {
-      playlists.splice(index, 1);
-      localStorage.setItem('playlists', JSON.stringify(playlists));
-      displayPlaylists();
-    }
-
-    // Initialize the UI
-    displayFiles();
-    displayPlaylists();
-
-    // Register Service Worker for offline functionality
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful with scope:', registration.scope);
-        })
-        .catch(error => {
-          console.error('ServiceWorker registration failed:', error);
-        });
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
