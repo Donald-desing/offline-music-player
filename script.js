@@ -7,28 +7,35 @@ const audioPlayer = document.getElementById('audioPlayer');
 fileInput.addEventListener('change', handleFileUpload);
 
 function handleFileUpload(event) {
-    const file = event.target.files[0];
+    const file = event.target.files[0]; // Get the uploaded file
+
     if (file && file.type === "audio/mp3") {
-        const fileURL = URL.createObjectURL(file);
+        const fileURL = URL.createObjectURL(file);  // Create a URL for the file
         
         // Create a new list item for the uploaded song
         const listItem = document.createElement('li');
         listItem.textContent = file.name;
-        
+
         // Add a click event to play the selected music
         listItem.addEventListener('click', () => {
-            audioPlayer.src = fileURL;
-            audioPlayer.play();
+            audioPlayer.src = fileURL;   // Set the audio source to the uploaded file
+            audioPlayer.play();          // Start playing the audio
         });
 
         // Append the list item to the music list
         musicList.appendChild(listItem);
+
+        // Optionally, auto-play the first uploaded file
+        if (musicList.children.length === 1) {
+            audioPlayer.src = fileURL;
+            audioPlayer.play();
+        }
     } else {
         alert('Please upload a valid MP3 file.');
     }
 }
 
-// Tab switching functionality
+// Tab switching functionality (same as before)
 function openTab(tabName) {
     const tabContents = document.querySelectorAll('.tab-content');
     const tabButtons = document.querySelectorAll('.tab-button');
