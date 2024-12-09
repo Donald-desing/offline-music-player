@@ -11,27 +11,35 @@
         <header>
             <h1>Offline Music Player</h1>
         </header>
-        <div class="player-controls">
-            <div id="shuffle" class="control">Shuffle: Off</div>
-            <div id="repeat" class="control">Repeat: Off</div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('yourMusic')">Your Music</button>
+            <button class="tab-button" onclick="openTab('uploadMusic')">Upload Music</button>
         </div>
 
-        <div class="music-list">
+        <!-- Tabs Content -->
+        <div id="yourMusic" class="tab-content active">
             <h3>Your Music</h3>
             <ul id="musicList">
                 <!-- Music list items will appear here -->
             </ul>
         </div>
 
-        <div class="file-upload">
+        <div id="uploadMusic" class="tab-content">
             <h3>Upload Your Music</h3>
             <input type="file" id="fileInput" accept="audio/mp3" />
             <label for="fileInput">Choose Files</label>
         </div>
-        
+
+        <div class="player-controls">
+            <div id="shuffle" class="control">Shuffle: Off</div>
+            <div id="repeat" class="control">Repeat: Off</div>
+        </div>
+
         <audio id="audioPlayer" controls></audio>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
