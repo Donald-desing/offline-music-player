@@ -1,8 +1,8 @@
-// Access the 'Your Music' list (where uploaded music will appear)
+// Access the 'Your Music' list and audio player
 const yourMusicList = document.getElementById('yourMusicList');
 const audioPlayer = document.getElementById('audioPlayer');
 
-// Handle file input (for when files are selected through file input)
+// Handle file input selection (for when files are selected through file input)
 function handleFileInput(event) {
     const file = event.target.files[0]; // Get the first file selected
     if (file && file.type === 'audio/mp3') {
@@ -39,7 +39,7 @@ function addMusicToYourList(fileURL, fileName) {
 // Event listeners for file input and drop event
 document.getElementById('fileInput').addEventListener('change', handleFileInput);
 
-// Drop zone functionality
+// Drop zone functionality (enable drag-and-drop)
 const dropZone = document.getElementById('dropZone');
 dropZone.addEventListener('dragover', (event) => event.preventDefault()); // Prevent default behavior (needed for drop)
 dropZone.addEventListener('drop', handleDrop);
