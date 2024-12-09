@@ -29,11 +29,13 @@ document.getElementById('fileInput').addEventListener('change', handleFileInput)
 
 // Function to handle tab switching
 document.getElementById('yourMusicTabBtn').addEventListener('click', () => {
+    // Show 'Your Music' tab, hide 'Upload' tab
     document.getElementById('yourMusicTab').style.display = 'block';
     document.getElementById('uploadTab').style.display = 'none';
 });
 
 document.getElementById('uploadTabBtn').addEventListener('click', () => {
+    // Show 'Upload' tab, hide 'Your Music' tab
     document.getElementById('uploadTab').style.display = 'block';
     document.getElementById('yourMusicTab').style.display = 'none';
 });
