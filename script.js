@@ -16,15 +16,15 @@ let currentMusicIndex = 0;
 fileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file && file.type === 'audio/mp3') {
-        const fileURL = URL.createObjectURL(file);
+        const fileURL = URL.createObjectURL(file); // Create a temporary URL for the audio file
         musicList.push({ name: file.name, url: fileURL });
         displayMusicList();
     } else {
-        alert("Please upload an MP3 file.");
+        alert("Please upload a valid MP3 file.");
     }
 });
 
-// Display music list
+// Display the uploaded music in the list
 function displayMusicList() {
     yourMusicList.innerHTML = ''; // Clear the list
     musicList.forEach((music, index) => {
