@@ -37,6 +37,7 @@ document.getElementById('fileInput').addEventListener('change', handleFileInput)
 
 // Drop zone functionality
 const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', (event) => event.preventDefault()); // Prevent default behavior (needed for drop)
 dropZone.addEventListener('drop', handleDrop);
 
 // Function to handle tab switching
