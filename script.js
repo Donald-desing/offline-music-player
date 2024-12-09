@@ -8,6 +8,8 @@ function handleFileInput(event) {
     if (file && file.type === 'audio/mp3') {
         const fileURL = URL.createObjectURL(file); // Generate a URL for the file
         addMusicToYourList(fileURL, file.name); // Add to 'Your Music' list
+    } else {
+        alert("Please upload an MP3 file.");
     }
 }
 
@@ -18,6 +20,8 @@ function handleDrop(event) {
     if (file && file.type === 'audio/mp3') {
         const fileURL = URL.createObjectURL(file); // Generate a URL for the file
         addMusicToYourList(fileURL, file.name); // Add to 'Your Music' list
+    } else {
+        alert("Please upload an MP3 file.");
     }
 }
 
