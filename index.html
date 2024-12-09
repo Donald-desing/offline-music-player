@@ -7,32 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Tabs for switching sections -->
-    <div class="tabs">
-        <button class="tabButton active" id="tabUpload">Upload Music</button>
-        <button class="tabButton" id="tabYourMusic">Your Music</button>
+    <!-- Music Player Section -->
+    <audio id="audioPlayer" controls></audio>
+
+    <!-- Navigation Bar / Tabs -->
+    <div id="tabs">
+        <button id="yourMusicTabBtn">Your Music</button>
+        <button id="uploadTabBtn">Upload</button>
     </div>
 
-    <!-- Tab Content: Upload Music -->
-    <div id="uploadTab" class="tabContent active">
-        <h3>Upload Your Music</h3>
+    <!-- Your Music Section -->
+    <div id="yourMusicTab" style="display:block;">
+        <h2>Your Music</h2>
+        <ul id="yourMusicList"></ul>
+    </div>
+
+    <!-- Upload Section -->
+    <div id="uploadTab" style="display:none;">
+        <h2>Upload Your Music</h2>
         <input type="file" id="fileInput" accept="audio/mp3">
-        <label for="fileInput">Choose Files</label>
-        <div id="dropZone">Drag & Drop Files Here</div>
-        <ul id="musicList"></ul>
-    </div>
-
-    <!-- Tab Content: Your Music -->
-    <div id="yourMusicTab" class="tabContent">
-        <h3>Your Music</h3>
-        <ul id="uploadedMusicList"></ul>
-    </div>
-
-    <!-- Audio Controls -->
-    <div id="controls">
-        <audio id="audioPlayer" controls></audio>
-        <button id="shuffleBtn">Shuffle: Off</button>
-        <button id="repeatBtn">Repeat: Off</button>
+        <div id="dropZone" style="border: 2px dashed #ccc; padding: 20px; width: 300px; text-align: center;">
+            Drop your MP3 files here
+        </div>
     </div>
 
     <script src="script.js"></script>
