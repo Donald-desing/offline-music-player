@@ -28,4 +28,25 @@ function handleFileUpload(event) {
     }
 }
 
-// Play music when a list item is clicked
+// Tab switching functionality
+function openTab(tabName) {
+    const tabContents = document.querySelectorAll('.tab-content');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    
+    // Hide all tab contents
+    tabContents.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Deactivate all buttons
+    tabButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show the selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Activate the clicked button
+    const activeButton = Array.from(tabButtons).find(button => button.textContent.toLowerCase() === tabName.replace('upload', 'upload ').toLowerCase());
+    activeButton.classList.add('active');
+}
