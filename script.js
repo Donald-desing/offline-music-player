@@ -1,103 +1,68 @@
-const audioPlayer = document.getElementById("audio-player");
-const audioList = document.getElementById("audio-list");
-const progressBar = document.getElementById("progress-bar");
-const shuffleButton = document.getElementById("shuffle-btn");
-const repeatButton = document.getElementById("repeat-btn");
-const fileInput = document.getElementById("file-input");
+document.addEventListener("DOMContentLoaded", function () {
+  const audioPlayer = document.getElementById("audio-player");
+  const audioSource = document.getElementById("audio-source");
+  const shuffleButton = document.getElementById("shuffle");
+  const repeatButton = document.getElementById("repeat");
+  const musicListContainer = document.getElementById("music-list-items");
+  const fileInput = document.getElementById("file-input");
+  const fileNameDisplay = document.getElementById("file-name");
 
-let audioFiles = [];
-let isShuffling = false;
-let isRepeating = false;
+  let shuffleMode = false;
+  let repeatMode = false;
+  let musicFiles = [];
 
-// Load initial tracks from local storage
-function loadPlaylist() {
-  const savedTracks = JSON.parse(localStorage.getItem("audioFiles")) || [];
-  audioFiles = savedTracks;
+  // Shuffle and Repeat toggles
+  shuffleButton.addEventListener("click", function () {
+    shuffleMode = !shuffleMode;
+    shuffleButton.textContent = shuffleMode ? "Shuffle: On" : "Shuffle: Off";
+  });
 
-  savedTracks.forEach((track) => {
-    const li = document.createElement("li");
-    li.textContent = track.name;
-    li.dataset.file = track.file;
+  repeatButton.addEventListener("click", function () {
+    repeatMode = !repeatMode;
+    repeatButton.textContent = repeatMode ? "Repeat: On" : "Repeat: Off";
+    audioPlayer.loop = repeatMode;
+  });
 
-    li.addEventListener("click", () => {
-      audioPlayer.src = li.dataset.file;
-      audioPlayer.play();
+  // Handle music file upload and add to list
+  fileInput.addEventListener("change", handleFileUpload);
+  document.addEventListener("dragover", (e) => e.preventDefault());
+  document.addEventListener("drop", handleDragAndDrop);
+
+  function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("audio")) {
+      addMusicToList(file);
+    }
+  }
+
+  function handleDragAndDrop(event) {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file && file.type.startsWith("audio")) {
+      addMusicToList(file);
+    }
+  }
+
+  function addMusicToList(file) {
+    const listItem = document.createElement("li");
+    const musicName = file.name;
+    const musicItem = document.createElement("div");
+    musicItem.classList.add("music-info");
+
+    musicItem.innerHTML = `
+      <span class="music-name">${musicName}</span>
+      <button class="remove-btn">Remove</button>
+    `;
+
+    listItem.appendChild(musicItem);
+    musicListContainer.appendChild(listItem);
+
+    listItem.querySelector(".remove-btn").addEventListener("click", function () {
+      musicListContainer.removeChild(listItem);
+      musicFiles = musicFiles.filter((f) => f.name !== musicName);
     });
 
-    audioList.appendChild(li);
-  });
-}
-
-// Save tracks to local storage
-function savePlaylist() {
-  localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
-}
-
-// Handle shuffle functionality
-shuffleButton.addEventListener("click", () => {
-  isShuffling = !isShuffling;
-  shuffleButton.textContent = isShuffling ? "Shuffle: On" : "Shuffle: Off";
-});
-
-// Handle repeat functionality
-repeatButton.addEventListener("click", () => {
-  isRepeating = !isRepeating;
-  repeatButton.textContent = isRepeating ? "Repeat: On" : "Repeat: Off";
-});
-
-// Play next track or shuffle
-audioPlayer.addEventListener("ended", () => {
-  if (isRepeating) {
-    audioPlayer.play();
-  } else if (isShuffling) {
-    const randomIndex = Math.floor(Math.random() * audioFiles.length);
-    audioPlayer.src = audioFiles[randomIndex].file;
-    audioPlayer.play();
-  } else {
-    const currentIndex = audioFiles.findIndex(
-      (audio) => audio.file === audioPlayer.src
-    );
-    const nextIndex = (currentIndex + 1) % audioFiles.length;
-    audioPlayer.src = audioFiles[nextIndex].file;
-    audioPlayer.play();
+    musicFiles.push(file);
+    fileNameDisplay.textContent = `File Uploaded: ${musicName}`;
   }
 });
-
-// Update progress bar
-audioPlayer.addEventListener("timeupdate", () => {
-  const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-  progressBar.value = progress || 0;
-});
-
-// Seek track position
-progressBar.addEventListener("click", (event) => {
-  const rect = progressBar.getBoundingClientRect();
-  const clickX = event.clientX - rect.left;
-  const newTime = (clickX / rect.width) * audioPlayer.duration;
-  audioPlayer.currentTime = newTime;
-});
-
-// Handle file uploads
-fileInput.addEventListener("change", (event) => {
-  const files = event.target.files;
-
-  Array.from(files).forEach((file) => {
-    const url = URL.createObjectURL(file);
-    const li = document.createElement("li");
-    li.textContent = file.name;
-    li.dataset.file = url;
-
-    li.addEventListener("click", () => {
-      audioPlayer.src = li.dataset.file;
-      audioPlayer.play();
-    });
-
-    audioList.appendChild(li);
-    audioFiles.push({ name: file.name, file: url });
-  });
-
-  savePlaylist();
-});
-
-// Load playlist on page load
-loadPlaylist();
